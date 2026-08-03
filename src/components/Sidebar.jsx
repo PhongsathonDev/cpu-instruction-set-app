@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookMarked, ChevronRight, ListFilter } from 'lucide-react';
+import { BookMarked, ChevronRight, ListFilter, Grid } from 'lucide-react';
 
 export default function Sidebar({ modules, activeModuleId, setActiveModuleId, searchQuery }) {
   const filteredModules = modules.filter(m => 
@@ -8,19 +8,24 @@ export default function Sidebar({ modules, activeModuleId, setActiveModuleId, se
     m.content.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const activeModule = modules.find(m => m.id === activeModuleId) || modules[0];
+
   return (
     <aside className="sidebar-nav">
-      <div className="sidebar-title">
+      {/* Desktop Title Header */}
+      <div className="sidebar-title desktop-only">
         <span>สารบัญเนื้อหา (12 บทสรุป)</span>
         <BookMarked size={16} />
       </div>
 
-      {/* Quick Mobile Dropdown Selector */}
-      <div className="mobile-topic-select-wrapper">
-        <label className="mobile-topic-label">
-          <ListFilter size={16} />
-          <span>เลือกหัวข้ออ่านสรุป:</span>
-        </label>
+      {/* Mobile-Only Navigation Container */}
+      <div className="mobile-topic-nav-container">
+        <div className="mobile-topic-header">
+          <ListFilter size={18} color="#4f46e5" />
+          <span className="mobile-topic-header-title">เลือกสารบัญเนื้อหา (12 บท):</span>
+        </div>
+
+        {/* Full Title Dropdown */}
         <select
           className="mobile-topic-select"
           value={activeModuleId}
@@ -32,10 +37,24 @@ export default function Sidebar({ modules, activeModuleId, setActiveModuleId, se
             </option>
           ))}
         </select>
+
+        {/* Quick Number Badges Grid (1-12) */}
+        <div className="mobile-badges-grid">
+          {modules.map((m) => (
+            <button
+              key={m.id}
+              className={`mobile-badge-btn ${activeModuleId === m.id ? 'active' : ''}`}
+              onClick={() => setActiveModuleId(m.id)}
+              title={m.title}
+            >
+              {m.moduleNumber}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Topic List / Pills */}
-      <ul className="topic-list">
+      {/* Desktop Topic List */}
+      <ul className="topic-list desktop-topic-list">
         {filteredModules.map((m) => (
           <li key={m.id}>
             <button
