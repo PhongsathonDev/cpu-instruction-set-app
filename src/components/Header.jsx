@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Cpu, Calculator, HelpCircle, Layers, Search, Sparkles, Sliders } from 'lucide-react';
+import { BookOpen, Cpu, Calculator, HelpCircle, Layers, Search, Sliders } from 'lucide-react';
 
 export default function Header({ activeTab, setActiveTab, searchQuery, setSearchQuery, totalQuestions }) {
   return (
@@ -9,7 +9,7 @@ export default function Header({ activeTab, setActiveTab, searchQuery, setSearch
           <div className="logo-badge">CS 3106</div>
           <div className="title-group">
             <h1>บทที่ 3: ชุดคำสั่งและวัฏจักรคำสั่งของ CPU</h1>
-            <p>Computer System Organization | เอกสารทบทวนสอบแบบละเอียด 100%</p>
+            <p className="desktop-only">Computer System Organization | เอกสารทบทวนสอบแบบละเอียด 100%</p>
           </div>
         </div>
 
@@ -26,7 +26,7 @@ export default function Header({ activeTab, setActiveTab, searchQuery, setSearch
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                style={{ fontSize: '12px', color: '#94a3b8', background: '#cbd5e1', borderRadius: '50%', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                style={{ fontSize: '12px', color: '#94a3b8', background: '#cbd5e1', borderRadius: '50%', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >
                 ✕
               </button>
@@ -42,7 +42,7 @@ export default function Header({ activeTab, setActiveTab, searchQuery, setSearch
             onClick={() => setActiveTab('summary')}
           >
             <BookOpen size={18} />
-            สรุปเนื้อหา 12 บท
+            <span>สรุปเนื้อหา <small className="tab-sub">12 บท</small></span>
           </button>
 
           <button
@@ -50,7 +50,7 @@ export default function Header({ activeTab, setActiveTab, searchQuery, setSearch
             onClick={() => setActiveTab('quiz')}
           >
             <HelpCircle size={18} />
-            คลังข้อสอบเตรียมสอบ
+            <span>คลังข้อสอบ</span>
             <span className="tab-badge" style={{ background: '#dcfce7', color: '#15803d' }}>{totalQuestions} ข้อ</span>
           </button>
 
@@ -59,8 +59,7 @@ export default function Header({ activeTab, setActiveTab, searchQuery, setSearch
             onClick={() => setActiveTab('cycle-sim')}
           >
             <Cpu size={18} />
-            จำลอง CPU Cycle
-            <span className="tab-badge">Interactive</span>
+            <span>จำลอง CPU Cycle</span>
           </button>
 
           <button
@@ -68,7 +67,7 @@ export default function Header({ activeTab, setActiveTab, searchQuery, setSearch
             onClick={() => setActiveTab('address-calc')}
           >
             <Calculator size={18} />
-            คำนวณ 7 Addressing Modes
+            <span>คำนวณ Address</span>
           </button>
 
           <button
@@ -76,7 +75,7 @@ export default function Header({ activeTab, setActiveTab, searchQuery, setSearch
             onClick={() => setActiveTab('format-tool')}
           >
             <Sliders size={18} />
-            เปรียบเทียบ 1-4 Address Formats
+            <span>เปรียบเทียบ Format</span>
           </button>
 
           <button
@@ -84,7 +83,7 @@ export default function Header({ activeTab, setActiveTab, searchQuery, setSearch
             onClick={() => setActiveTab('flashcards')}
           >
             <Layers size={18} />
-            Flashcards
+            <span>Flashcards</span>
           </button>
         </nav>
       </div>
